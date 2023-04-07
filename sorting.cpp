@@ -1,5 +1,7 @@
 #include "arrayutils.h"
 #include "sequentialsorts.h"
+#include <chrono>
+using namespace std::chrono;
 
 using namespace std;
 
@@ -31,8 +33,12 @@ int main(int argc, char const *argv[])
     cout << "Bubble Sort" << endl;
     copy = generateIntArrayCopy(array, ARRAY_SIZE);
     printIntArray(copy, ARRAY_SIZE);
+    auto start = high_resolution_clock::now();
     bubbleSort(copy, ARRAY_SIZE);
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
     printIntArray(copy, ARRAY_SIZE);
+    cout << "Time taken: " << duration.count() << " microseconds" << endl;
 
     delete[] copy;
 

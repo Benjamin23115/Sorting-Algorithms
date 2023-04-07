@@ -1,5 +1,4 @@
 #pragma once
-
 /**
  * Function peforms a selection sort of the int array passed in.
  *
