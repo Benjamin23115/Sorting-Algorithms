@@ -33,12 +33,8 @@ int main(int argc, char const *argv[])
     cout << "Bubble Sort" << endl;
     copy = generateIntArrayCopy(array, ARRAY_SIZE);
     printIntArray(copy, ARRAY_SIZE);
-    auto start = high_resolution_clock::now();
     bubbleSort(copy, ARRAY_SIZE);
-    auto stop = high_resolution_clock::now();
-    auto duration = duration_cast<microseconds>(stop - start);
     printIntArray(copy, ARRAY_SIZE);
-    cout << "Time taken: " << duration.count() << " microseconds" << endl;
 
     delete[] copy;
 
@@ -49,6 +45,26 @@ int main(int argc, char const *argv[])
     mergeSort(copy, 0, ARRAY_SIZE - 1);
     printIntArray(copy, ARRAY_SIZE);
 
+    delete[] copy;
+    // Did the bubble sorting outside of the other bubble sort to keep the code organized
+    // I wanted to use actual data for the array rather than blank arrays so I "randomized" the data each time
+    cout << "========================================" << endl;
+    cout << "Bubble Sort Timed" << endl;
+    int ArraySize = 100;
+    for (int i = 0; i < 3; i++)
+    {
+    auto start = high_resolution_clock::now();
+        copy = generateIntArrayCopy(array, ArraySize);
+        for (int j = 0; j < ArraySize; j++)
+        {
+            copy[j] = rand();
+        }
+        bubbleSort(copy, ArraySize);
+        ArraySize *= 10;
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
+    cout << "Time taken at ArraySize: "<< ArraySize <<" "<< duration.count() << " microseconds" << endl;
+    }
     delete[] copy;
 
     return 0;
